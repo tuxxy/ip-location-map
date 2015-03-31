@@ -11,7 +11,6 @@ for line in f.readlines():
 	print "Getting location for " + line 
 	req=ip_lookup.get_city(line)
 	time.sleep(0.5)
-	srclong=float(req['longitude']); srclat=float(req['latitude'])
 	with open('geo.txt', 'ab') as geo:
 		geo.write(req['longitude'] + ',' + req['latitude']+'\n')
 
