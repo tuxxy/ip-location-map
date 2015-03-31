@@ -8,9 +8,9 @@ ip_lookup = pyipinfodb.IPInfo('API_KEY_HERE')
 
 with open('ips.txt','r') as f:
 	for line in f.readlines():
-		print "Getting location for " + line 
+		print "Getting location for %s" % line 
 		req=ip_lookup.get_city(line)
 		time.sleep(0.5)
 		with open('geo.txt', 'ab') as geo:
-			geo.write(req['longitude'] + ',' + req['latitude']+'\n')
+			geo.write('%s,%s\n' % (req['longitude'], req['latitude']))
 
