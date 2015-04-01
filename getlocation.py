@@ -1,7 +1,5 @@
-import json
-import numpy as np
-import pyipinfodb
-import time
+#!/usr/bin/env python
+from pyipinfodb import pyipinfodb
 
 ip_lookup = pyipinfodb.IPInfo('API_KEY_HERE')
 
