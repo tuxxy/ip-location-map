@@ -6,11 +6,11 @@ import time
 ip_lookup = pyipinfodb.IPInfo('API_KEY_HERE')
 
 
-f=open('ips.txt','r')
-for line in f.readlines():
-	print "Getting location for " + line 
-	req=ip_lookup.get_city(line)
-	time.sleep(0.5)
-	with open('geo.txt', 'ab') as geo:
-		geo.write(req['longitude'] + ',' + req['latitude']+'\n')
+with open('ips.txt','r') as f:
+	for line in f.readlines():
+		print "Getting location for %s" % line 
+		req=ip_lookup.get_city(line)
+		time.sleep(0.5)
+		with open('geo.txt', 'ab') as geo:
+			geo.write('%s,%s\n' % (req['longitude'], req['latitude']))
 
