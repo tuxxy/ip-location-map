@@ -12,5 +12,5 @@ with open('ips.txt','r') as f:
 		req=ip_lookup.get_city(line)
 		time.sleep(0.5)
 		with open('geo.txt', 'ab') as geo:
-			geo.write('%s,%s\n' % (req['longitude'], req['latitude']))
+			geo.write('{},{}\n'.format(req['longitude'], req['latitude']))
 
