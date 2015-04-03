@@ -4,20 +4,20 @@
 
 Here are some python scripts you can use to plot ip-addresses on a map
 
+### API:
+
+This branch uses the [freegeoip API](https://freegeoip.net), so you don't need an API Key to use it.
+However, you are limited to 10,000 requests per hour.
 
 ### Dependencies:
 
 * [matplotlib basemap](http://matplotlib.org/basemap/)
-* [pyipinfodb](https://github.com/mossberg/pyipinfodb)
-
 
 ### Short usage guide:
 
-* First, you need to get an API key for [ipinfodb](http://ipinfodb.com/)
-
 * Put your IP-addresses in a file called **ips.txt**, with one IP on each line. (Note: only tested with IPv4)
 
-* Run the **getlocation.py** script, like so: `python getlocation.py <API_KEY> < ips.txt > geo.txt` It will create a file called **geo.txt**, which contains coordinates on each line.
+* Run the **getlocation.py** script, like so: `python getlocation.py < ips.txt > geo.txt` It will create a file called **geo.txt**, which contains coordinates on each line.
 
 * Finally, run the **generatemap.py** script, like so: `python generatemap.py < geo.txt` It will create an image file called map.png.
 
