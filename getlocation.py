@@ -26,10 +26,11 @@ def memoize(func):
 
 
 @memoize
-def get_location(ip_lookup, ip):
+def get_location(ip):
     print('Getting location for', ip, file=stderr)
-    
-    ip_data = ip_lookup.get_city(ip)
+    url = "https://freegeoip.net/json/{}".format(ip)
+    ip_lookup = urllib2.urlopen(url)
+    ip_data = json.loads(ip_lookup.read().decode('utf-8'))
     yield ip_data['longitude'], ip_data['latitude']
 
 
@@ -48,15 +49,12 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('--input', '-i', default=stdin)
     parser.add_argument('--output', '-o', default=stdout)
-    parser.add_argument('API_KEY')
     args = parser.parse_args()
-    
-    ip_lookup = pyipinfodb.IPInfo(args.API_KEY)
     
     with smart_open(args.input) as istr:
         with smart_open(args.output, 'w') as ostr:
             for ip in istr:
-                print(*get_location(ip_lookup, ip), sep=",", file=ostr)
+                print(*get_location(ip), sep=",", file=ostr)
 
 if __name__ == '__main__':
     main()
