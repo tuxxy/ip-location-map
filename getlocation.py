@@ -2,8 +2,11 @@
 from __future__ import print_function
 from argparse import ArgumentParser
 from contextlib import contextmanager
-from pyipinfodb import pyipinfodb
 from sys import stdin, stdout, stderr
+try:
+    import urllib2
+except ImportError:
+    import urllib.request as urllib2
 
 
 def memoize(func):
@@ -24,6 +27,7 @@ def memoize(func):
 @memoize
 def get_location(ip_lookup, ip):
     print('Getting location for', ip, file=stderr)
+    
     ip_data = ip_lookup.get_city(ip)
     yield ip_data['longitude'], ip_data['latitude']
 
