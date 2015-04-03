@@ -1,5 +1,7 @@
 # ip-location-map
 
+[[ ORIGINALLY AUTHORED BY: Joakim Algrøy (https://github.com/joakimalgroy) ]]
+
 Here are some python scripts you can use to plot ip-addresses on a map
 
 
