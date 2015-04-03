@@ -3,6 +3,7 @@ from __future__ import print_function
 from argparse import ArgumentParser
 from contextlib import contextmanager
 from sys import stdin, stdout, stderr
+import json
 try:
     import urllib2
 except ImportError:
