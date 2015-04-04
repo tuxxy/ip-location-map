@@ -5,6 +5,7 @@ from contextlib import contextmanager
 from pyipinfodb import pyipinfodb
 from sys import stdin, stdout, stderr
 
+
 def memoize(func):
     '''
     Decorator for a function which caches results. Based on
@@ -19,6 +20,7 @@ def memoize(func):
     
     return memodict()
 
+
 @memoize
 def get_location(ip_lookup, ip):
     print('Getting location for', ip, file=stderr)
@@ -28,11 +30,14 @@ def get_location(ip_lookup, ip):
 
 @contextmanager
 def smart_open(file_or_filename, *args, **kwargs):
-    if isinstance(file_or_filename, (int, str, bytes)):
-        with open(file_or_filename, *args, **kwargs) as f:
-            yield f
-    else:
+    try:
+        f = open(file_or_filename, *args, **kwargs)
+    except TypeError:
         yield file_or_filename
+    else:
+        with f:
+            yield f
+
 
 def main():
     parser = ArgumentParser()
