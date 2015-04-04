@@ -28,7 +28,7 @@ def get_location(ip_lookup, ip):
 
 @contextmanager
 def smart_open(file_or_filename, *args, **kwargs):
-    if isinstance(file_or_filename, (int, str, unicode, bytes)):
+    if isinstance(file_or_filename, (int, str, bytes)):
         with open(file_or_filename, *args, **kwargs) as f:
             yield f
     else:
