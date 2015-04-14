@@ -12,6 +12,12 @@ If you don't have a non-free email account and can't get an API key, see the [fr
 * [pyipinfodb](https://github.com/mossberg/pyipinfodb)
 
 
+You can install pyipinfodb very easily with the requirements.txt file:
+
+    pip install -r requirements.txt
+
+This will satisfy the pyipinfodb dependency, but, as of the current release, you will still need to install matplotlib basemap manually.
+
 ### Short usage guide:
 
 * First, you need to get an API key for [ipinfodb](http://ipinfodb.com/)
