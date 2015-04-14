@@ -3,8 +3,25 @@ from __future__ import print_function
 from argparse import ArgumentParser
 from contextlib import contextmanager
 from pyipinfodb import pyipinfodb
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
 from sys import stdin, stdout, stderr
+import numpy as np
 
+
+def plot_locations(locations, output_filename):
+    ip_map = Basemap(projection='robin', lon_0=0, resolution='c')
+
+    for line in locations:
+    	srclong, srclat = map(float, line.split(','))
+    	x, y = ip_map(srclong, srclat)
+    	plt.plot(x,y, 'o', color='#ff0000', ms=2.7, markeredgewidth=0.5)
+
+
+    ip_map.drawcountries(color='#ffffff')
+    ip_map.fillcontinents(color='#cccccc',lake_color='#ffffff')
+    
+    plt.savefig(output_filename, dpi=600)
 
 def memoize(func):
     '''
@@ -43,6 +60,7 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('--input', '-i', default=stdin)
     parser.add_argument('--output', '-o', default=stdout)
+    parser.add_argument('--gen-map', '-G', action='store_true')
     parser.add_argument('API_KEY')
     args = parser.parse_args()
     
@@ -50,8 +68,12 @@ def main():
     
     with smart_open(args.input) as istr:
         with smart_open(args.output, 'w') as ostr:
-            for ip in istr:
-                print(*get_location(ip_lookup, ip), sep=",", file=ostr)
+            if args.gen_map:
+                for ip in istr:
+                    plot_locations(*(get_location(ip_lookup, ip), "ip_map.png"))
+            else:
+                for ip in istr:
+                    print(*get_location(ip_lookup, ip), sep=",", file=ostr)
 
 if __name__ == '__main__':
     main()
