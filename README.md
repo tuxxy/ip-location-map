@@ -1,7 +1,5 @@
 # ip-location-map
 
-[[ ORIGINALLY AUTHORED BY: Joakim Algrøy (https://github.com/joakimalgroy) ]]
-
 Here are some python scripts you can use to plot ip-addresses on a map
 
 If you don't have a non-free email account and can't get an API key, see the [freegeoip branch](https://github.com/tuxmascot/ip-location-map/tree/freegeoip).
